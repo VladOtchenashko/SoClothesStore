@@ -8,7 +8,20 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { Button } from '@mui/material';
+import { Badge, Button } from '@mui/material';
+import SandwichMenu from './SandwichMenu';
+import { NavLink } from 'react-router-dom';
+
+const SandwichLinks = [
+  {title: 'catalog', path: '/catalog'},
+  {title: 'about', path: '/about'},
+  {title: 'contacts', path: '/contacts'},
+]
+
+const AccLinks = [
+  {title: 'login', path: '/login'},
+  {title: 'register', path: '/register'},
+]
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,41 +67,30 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
     return (
-    
-    /*<AppBar position="static" color="inherit" sx={{mb: 4, height: 100}}>
-            <Toolbar>
-                <Typography variant="h5" sx={{mt: 3}}>
-                    SO Clothes Store
-                </Typography>
-            </Toolbar>
-        </AppBar>*/
+      <AppBar position="fixed" color='inherit'>
+        <Toolbar sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100px'}}>
+        <Box display='flex' alignItems='center' sx={{ml: 3}}>
+          <SandwichMenu />
 
-        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" color='inherit' sx={{height: 90}}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2, ml: 2 }}
-          >
-            <MenuIcon fontSize='large' sx={{mt: 2}} />
-          </IconButton>
               <Typography variant="h4" noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, mt: 2 }}>
-            <Button color="inherit">
+              component={NavLink} to={'/'}
+              color={'inherit'}
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, ml: 5 }}>
+            <Button color="inherit" sx={{":hover": {backgroundColor: 'inherit'}}}>
               <Typography variant="h4">SO Clothes</Typography>
             </Button>
           </Typography>
-          
+          </Box>
+
+          <Box display='flex' alignItems='center' sx={{mr: 3}}>
           <Button 
           color='inherit'
-          sx={{mt: 1.2}}>
+          sx={{":hover":{backgroundColor:'inherit'}}}>
+            
             <LocalMallIcon fontSize='large'></LocalMallIcon>
+            <Badge badgeContent='2' color='primary'></Badge>
             </Button>
-          <Search sx={{mt: 2, mr: 7}}>
+          <Search>
             <SearchIconWrapper>
               <SearchIcon fontSize='large'/>
             </SearchIconWrapper>
@@ -97,8 +99,8 @@ export default function Header() {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          </Box>
         </Toolbar>
       </AppBar>
-    </Box>
     );
 }
